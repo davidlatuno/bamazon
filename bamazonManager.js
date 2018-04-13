@@ -39,6 +39,10 @@ function manager() {
                 case "Add to Inventory":
                     productsTable();
                     break;
+
+                case "Add New Product":
+                    inquireAdd();
+                    break;
                 
                 case "Exit":
                     connection.end();
@@ -170,6 +174,47 @@ function addInventory(number, productId) {
             manager();
         })
 };
+
+// Inquirer for addProduct
+function inquireAdd() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the name of the product?",
+                name: "name"
+            },
+            {
+                type: "input",
+                message: "What is the department of the product?",
+                name: "department"
+            },
+            {
+                type: "input",
+                message: "What is the price of the product?",
+                name: "price"
+            },
+            {
+                type: "input",
+                message: "What is the initial quantity of the product?",
+                name: "stock"
+            },
+            {
+                message: "Are you sure?",
+                type: "confirm",
+                name: "confirm",
+                default: true
+            }
+        ])
+        .then(function(input){
+            if (!input.confirm) {
+                inquireAdd();
+            } else if (input.name === "" || input.department === "" || input.price === "" || input.stock === "") {
+                console.log("ONE OR MORE FIELDS NOT FILLED OUT");
+                inquireAdd();
+            }
+        })
+}
 
 // Function that adds item to database
 function addProduct(name, department, price, quantity) {
