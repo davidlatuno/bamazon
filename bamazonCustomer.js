@@ -77,12 +77,13 @@ function readID(productId, productPurchase, callback) {
     connection.query("SELECT * FROM products WHERE id=?", [productId], function (err, res) {
         if (err) throw err;
         var currentQuant = res[0].stock_quantity;
-        var newQuant = currentQuant - productPurchase
-        callback(newQuant, productId);
+        var price = (res[0].price) * productPurchase;
+        var newQuant = currentQuant - productPurchase;
+        callback(newQuant, productId, price);
     });
 };
 
-function purchase(newQuant, ID) {
+function purchase(newQuant, ID, price) {
     connection.query("UPDATE products SET ? WHERE ?",
         [
             {
@@ -93,7 +94,7 @@ function purchase(newQuant, ID) {
             }
         ], function (err, res) {
             if (err) throw err;
-            console.log("\nPURCHASE COMPLETE\n");
-            setTimeout(productsTable, 1000);
+            console.log("\nPURCHASE OF " + price + " COMPLETE\n");
+            setTimeout(productsTable, 2500);
         })
 }
