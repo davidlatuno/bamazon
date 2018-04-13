@@ -80,3 +80,15 @@ function addInventory(number, productId) {
             // console.log(res.product_name + " Product Updated!")
         })
 };
+
+// Function that adds item to database
+function addProduct(name, department, price, quantity) {
+    connection.query("INSERT INTO products SET ?", {
+        product_name: name,
+        department_name: department,
+        price: price,
+        stock_quantity: quantity
+    }, function(err, res) {
+        console.log("\nPRODUCT SUCCESSFULLY ADDED!\n")
+    })
+};
