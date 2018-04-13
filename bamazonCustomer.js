@@ -10,16 +10,20 @@ var connection = mysql.createConnection({
     database: "bamazon"
 });
 
-connection.query("SELECT * FROM products", function (err, res) {
-    if (err) throw err;
-    data = [["ID", "NAME", "DEPARMENT", "PRICE", "QUANTITY"]];
-    for (var i = 0; i < res.length; i++) {
-        data.push(Object.values(res[i]));
-    }
-    var result = table(data);
-    console.log(result);
-    intro();
-});
+productsTable();
+
+function productsTable() {
+    connection.query("SELECT * FROM products", function (err, res) {
+        if (err) throw err;
+        data = [["ID", "NAME", "DEPARMENT", "PRICE", "QUANTITY"]];
+        for (var i = 0; i < res.length; i++) {
+            data.push(Object.values(res[i]));
+        }
+        var result = table(data);
+        console.log(result);
+        intro();
+    });
+}
 
 function intro() {
     inquirer
@@ -79,16 +83,17 @@ function readID(productId, productPurchase, callback) {
 };
 
 function purchase(newQuant, ID) {
-    connection.query("UPDATE products SET ? WHERE ?", 
-    [
-        {
-            stock_quantity: newQuant
-        },
-        {
-            id: ID
-        }
-    ], function(err, res) {
-        if (err) throw err;
-        console.log("PURCHASE COMPLETE");
-    })
+    connection.query("UPDATE products SET ? WHERE ?",
+        [
+            {
+                stock_quantity: newQuant
+            },
+            {
+                id: ID
+            }
+        ], function (err, res) {
+            if (err) throw err;
+            console.log("\nPURCHASE COMPLETE\n");
+            setTimeout(productsTable, 1000);
+        })
 }
