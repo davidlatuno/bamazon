@@ -72,11 +72,17 @@ function buyID() {
                 buyID();
             } else {
                 var userID = parseInt(input.id);
-                if (productIdArray.includes(userID)) {
-                    readID(input.id, input.number, purchase);
-                } else {
-                    console.log("\nITEM DOES NOT EXIST\n");
+                var userAmount = parseInt(input.number);
+                if (isNaN(userID) || isNaN(userAmount)) {
+                    console.log("\nINVALID ID or AMOUNT ENTERED\n");
                     buyID();
+                } else {
+                    if (productIdArray.includes(userID) && userAmount > 0) {
+                        readID(input.id, input.number, purchase);
+                    } else {
+                        console.log("\nITEM DOES NOT EXIST or INVALID PRODUCT AMOUNT\n");
+                        buyID();
+                    }
                 }
             }
         })
