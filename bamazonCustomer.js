@@ -12,12 +12,15 @@ var connection = mysql.createConnection({
 
 productsTable();
 
+var productIdArray = [];
+
 function productsTable() {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
         data = [["ID", "NAME", "DEPARMENT", "PRICE", "QUANTITY"]];
         for (var i = 0; i < res.length; i++) {
             data.push(Object.values(res[i]));
+            productIdArray.push(res[i].id);
         }
         var result = table(data);
         console.log(result);
@@ -68,7 +71,13 @@ function buyID() {
             if (!input.confirm) {
                 buyID();
             } else {
-                readID(input.id, input.number, purchase);
+                var userID = parseInt(input.id);
+                if (productIdArray.includes(userID)) {
+                    readID(input.id, input.number, purchase);
+                } else {
+                    console.log("\nITEM DOES NOT EXIST\n");
+                    buyID();
+                }
             }
         })
 };
@@ -79,7 +88,12 @@ function readID(productId, productPurchase, callback) {
         var currentQuant = res[0].stock_quantity;
         var price = (res[0].price) * productPurchase;
         var newQuant = currentQuant - productPurchase;
-        callback(newQuant, productId, price);
+        if (newQuant < 0) {
+            console.log("\nINSUFFICIENT QUANTITY!\n");
+            intro();
+        } else {
+            callback(newQuant, productId, price);
+        }
     });
 };
 
