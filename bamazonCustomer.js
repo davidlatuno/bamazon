@@ -64,7 +64,31 @@ function buyID() {
             if (!input.confirm) {
                 buyID();
             } else {
-                
+                readID(input.id, input.number, purchase);
             }
         })
+};
+
+function readID(productId, productPurchase, callback) {
+    connection.query("SELECT * FROM products WHERE id=?", [productId], function (err, res) {
+        if (err) throw err;
+        var currentQuant = res[0].stock_quantity;
+        var newQuant = currentQuant - productPurchase
+        callback(newQuant, productId);
+    });
+};
+
+function purchase(newQuant, ID) {
+    connection.query("UPDATE products SET ? WHERE ?", 
+    [
+        {
+            stock_quantity: newQuant
+        },
+        {
+            id: ID
+        }
+    ], function(err, res) {
+        if (err) throw err;
+        console.log("PURCHASE COMPLETE");
+    })
 }
