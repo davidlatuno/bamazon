@@ -23,7 +23,7 @@ function productsTable() {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
         // Title Row
-        data = [["ID", "NAME", "DEPARMENT", "PRICE", "QUANTITY"]];
+         var data = [["ID", "NAME", "DEPARMENT", "PRICE", "QUANTITY"]];
         // Add products to data array
         for (var i = 0; i < res.length; i++) {
             data.push(Object.values(res[i]));
