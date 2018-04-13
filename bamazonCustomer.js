@@ -102,7 +102,7 @@ function buyID() {
         })
 };
 
-// Updates database when user inputs valid query
+// Reads database when user inputs valid query
 function readID(productId, productPurchase, callback) {
     connection.query("SELECT * FROM products WHERE id=?", [productId], function (err, res) {
         if (err) throw err;

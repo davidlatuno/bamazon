@@ -50,4 +50,33 @@ function lowTable() {
     });
 }
 
-lowTable();
+// Reads database when user inputs valid query
+function readID(productId, addQuantity, callback) {
+    connection.query("SELECT * FROM products WHERE id=?", [productId], function (err, res) {
+        if (err) throw err;
+        // Holds the current quantity of item chosen
+        var currentQuant = res[0].stock_quantity;
+    
+        // Calculates new product quantity
+        var newQuant = currentQuant + addQuantity;
+
+        // Calls addInventory function
+        callback(newQuant, productId);
+    });
+};
+
+// Add inventory to specific item
+function addInventory(number, productId) {
+    connection.query("UPDATE products SET ? WHERE ?", [
+        {
+            stock_quantity: number
+        },
+        {
+            id: productId
+        }
+    ],
+        function (err, res) {
+            console.log("\nPRODUCT UPDATED!\n");
+            // console.log(res.product_name + " Product Updated!")
+        })
+};
