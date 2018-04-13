@@ -39,7 +39,7 @@ function manager() {
                 case "Add to Inventory":
                     productsTable();
                     break;
-
+                
                 case "Exit":
                     connection.end();
                     break;
