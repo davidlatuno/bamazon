@@ -169,22 +169,26 @@ function inquireAdd() {
             {
                 type: "input",
                 message: "What is the name of the product?",
-                name: "name"
+                name: "name",
+                validate: emptyValidate
             },
             {
                 type: "input",
                 message: "What is the department of the product?",
-                name: "department"
+                name: "department",
+                validate: wordValidate
             },
             {
                 type: "input",
                 message: "What is the price of the product?",
-                name: "price"
+                name: "price",
+                validate: amountValidate
             },
             {
                 type: "input",
                 message: "What is the initial quantity of the product?",
-                name: "stock"
+                name: "stock",
+                validate: amountValidate
             },
             {
                 message: "Are you sure?",
@@ -197,7 +201,7 @@ function inquireAdd() {
             if (!input.confirm) {
                 inquireAdd();
             } else {
-            
+                addProduct(input.name, input.department, input.price, input.stock);
             }
         })
 }
@@ -242,6 +246,23 @@ function amountValidate(input) {
         if (isNaN(input) || parseInt(input) < 0 || input === "") {
             // Pass the return value in the done callback
             done('Positive number not entered');
+            return;
+        }
+        // Pass the return value in the done callback
+        done(null, true);
+    }, 1000);
+}
+
+// Validate for empty fields 
+function emptyValidate(input) {
+    // Declare function as asynchronous, and save the done callback
+    var done = this.async();
+
+    // Do async stuff
+    setTimeout(function () {
+        if (input === "") {
+            // Pass the return value in the done callback
+            done('Required Field');
             return;
         }
         // Pass the return value in the done callback
