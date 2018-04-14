@@ -190,15 +190,14 @@ function inquireAdd() {
                 message: "Are you sure?",
                 type: "confirm",
                 name: "confirm",
-                default: true
+                default: true,
             }
         ])
         .then(function (input) {
             if (!input.confirm) {
                 inquireAdd();
-            } else if (input.name === "" || input.department === "" || input.price === "" || input.stock === "") {
-                console.log("ONE OR MORE FIELDS NOT FILLED OUT");
-                inquireAdd();
+            } else {
+            
             }
         })
 }
@@ -240,7 +239,7 @@ function amountValidate(input) {
 
     // Do async stuff
     setTimeout(function () {
-        if (isNaN(input) || parseInt(input) < 0) {
+        if (isNaN(input) || parseInt(input) < 0 || input === "") {
             // Pass the return value in the done callback
             done('Positive number not entered');
             return;
