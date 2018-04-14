@@ -144,7 +144,7 @@ function idValidate(input) {
     }, 1000);
 }
 
-// Validate if id is a positive number 
+// Validate if amount is a positive number 
 function amountValidate(input) {
     // Declare function as asynchronous, and save the done callback
     var done = this.async();

@@ -43,7 +43,7 @@ function manager() {
                 case "Add New Product":
                     inquireAdd();
                     break;
-                
+
                 case "Exit":
                     connection.end();
                     break;
@@ -68,11 +68,11 @@ function productsTable(pass) {
         var result = table(data);
         console.log(result);
         if (pass === "View Products") {
-            manager();  
+            manager();
         } else {
             inquireInventory();
         }
-        
+
     })
 }
 
@@ -105,12 +105,14 @@ function inquireInventory() {
             {
                 type: "input",
                 message: "What is the ID of the item you would like to add inventory to?",
-                name: "id"
+                name: "id",
+                validate: idValidate
             },
             {
                 type: "input",
                 message: "How many units would you like to add?",
-                name: "number"
+                name: "number",
+                validate: amountValidate
             },
             {
                 message: "Are you sure?",
@@ -124,22 +126,7 @@ function inquireInventory() {
             if (!input.confirm) {
                 inquireInventory();
             } else {
-                var userID = parseInt(input.id);
-                var userAmount = parseInt(input.number);
-
-                // User validation for NaN
-                if (isNaN(userID) || isNaN(userAmount)) {
-                    console.log("\nINVALID ID or AMOUNT ENTERED\n");
-                    inquireInventory();
-                } else {
-                    // Second level of user validation for correct id numbers and positive purchase amoutns
-                    if (productIdArray.includes(userID) && userAmount > 0) {
-                        readID(input.id, input.number, addInventory);
-                    } else {
-                        console.log("\nITEM DOES NOT EXIST or INVALID PRODUCT AMOUNT\n");
-                        inquireInventory();
-                    }
-                }
+                readID(input.id, input.number, addInventory);
             }
         })
 }
@@ -206,7 +193,7 @@ function inquireAdd() {
                 default: true
             }
         ])
-        .then(function(input){
+        .then(function (input) {
             if (!input.confirm) {
                 inquireAdd();
             } else if (input.name === "" || input.department === "" || input.price === "" || input.stock === "") {
@@ -228,3 +215,37 @@ function addProduct(name, department, price, quantity) {
         manager();
     })
 };
+
+// Validate if id is a number and an included in the store
+function idValidate(input) {
+    // Declare function as asynchronous, and save the done callback
+    var done = this.async();
+
+    // Do async stuff
+    setTimeout(function () {
+        if (isNaN(input) || !productIdArray.includes(parseInt(input))) {
+            // Pass the return value in the done callback
+            done('Invalid ID or not a number entered');
+            return;
+        }
+        // Pass the return value in the done callback
+        done(null, true);
+    }, 1000);
+}
+
+// Validate if amount is a positive number 
+function amountValidate(input) {
+    // Declare function as asynchronous, and save the done callback
+    var done = this.async();
+
+    // Do async stuff
+    setTimeout(function () {
+        if (isNaN(input) || parseInt(input) < 0) {
+            // Pass the return value in the done callback
+            done('Positive number not entered');
+            return;
+        }
+        // Pass the return value in the done callback
+        done(null, true);
+    }, 1000);
+}
