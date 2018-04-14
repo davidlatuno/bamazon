@@ -23,7 +23,7 @@ function productsTable() {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
         // Title Row
-         var data = [["ID", "NAME", "DEPARMENT", "PRICE", "QUANTITY"]];
+        var data = [["ID", "NAME", "DEPARMENT", "PRICE", "QUANTITY"]];
         // Add products to data array
         for (var i = 0; i < res.length; i++) {
             data.push(Object.values(res[i]));
@@ -63,12 +63,14 @@ function buyID() {
             {
                 type: "input",
                 message: "What is the ID of the item you would like to buy?",
-                name: "id"
+                name: "id",
+                validate: idValidate
             },
             {
                 type: "input",
                 message: "How many units would you like to buy?",
-                name: "number"
+                name: "number",
+                validate: amountValidate
             },
             {
                 message: "Are you sure?",
@@ -82,22 +84,7 @@ function buyID() {
             if (!input.confirm) {
                 buyID();
             } else {
-                var userID = parseInt(input.id);
-                var userAmount = parseInt(input.number);
-
-                // User validation for NaN
-                if (isNaN(userID) || isNaN(userAmount)) {
-                    console.log("\nINVALID ID or AMOUNT ENTERED\n");
-                    buyID();
-                } else {
-                    // Second level of user validation for correct id numbers and positive purchase amoutns
-                    if (productIdArray.includes(userID) && userAmount > 0) {
-                        readID(input.id, input.number, purchase);
-                    } else {
-                        console.log("\nITEM DOES NOT EXIST or INVALID PRODUCT AMOUNT\n");
-                        buyID();
-                    }
-                }
+                readID(input.id, input.number, purchase);
             }
         })
 };
@@ -138,4 +125,38 @@ function purchase(newQuant, ID, price) {
             // Call original user prompt again after 2 seconds
             setTimeout(productsTable, 2000);
         })
+}
+
+// Validate if id is a number and an included in the store
+function idValidate(input) {
+    // Declare function as asynchronous, and save the done callback
+    var done = this.async();
+
+    // Do async stuff
+    setTimeout(function () {
+        if (isNaN(input) || !productIdArray.includes(parseInt(input))) {
+            // Pass the return value in the done callback
+            done('Invalid ID or not a number entered');
+            return;
+        }
+        // Pass the return value in the done callback
+        done(null, true);
+    }, 1000);
+}
+
+// Validate if id is a positive number 
+function amountValidate(input) {
+    // Declare function as asynchronous, and save the done callback
+    var done = this.async();
+
+    // Do async stuff
+    setTimeout(function () {
+        if (isNaN(input) || parseInt(input) < 0) {
+            // Pass the return value in the done callback
+            done('Positive number not entered');
+            return;
+        }
+        // Pass the return value in the done callback
+        done(null, true);
+    }, 1000);
 }
