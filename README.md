@@ -25,7 +25,7 @@ npm i
 
 ## Running the program
 
-There are two versions of bamazon: the customer and the manager.
+There are two versions of bamazon: the customer and the manager. After running the below terminal command you can follow the prompts to access the respective functions.
 
 In you terminal, you can run either:
 
