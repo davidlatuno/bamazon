@@ -21,7 +21,7 @@ function manager() {
             {
                 type: "list",
                 message: "What would you like to do?",
-                choices: ["View Products", "View Low Inventory", "Add to Inventory", "Add New Product", "Exit"],
+                choices: ["View Products", "View Low Inventory", "Add to Inventory", "Add New Product", "Delete Product", "Exit"],
                 name: "action"
             }
         ])
@@ -37,11 +37,15 @@ function manager() {
                     break;
 
                 case "Add to Inventory":
-                    productsTable();
+                    productsTable("Add");
                     break;
 
                 case "Add New Product":
                     inquireAdd();
+                    break;
+
+                case "Delete Product":
+                    productsTable("Delete");
                     break;
 
                 case "Exit":
@@ -69,8 +73,10 @@ function productsTable(pass) {
         console.log(result);
         if (pass === "View Products") {
             manager();
-        } else {
+        } else if (pass === "Add") {
             inquireInventory();
+        } else {
+            deleteInquire();
         }
 
     })
@@ -176,7 +182,7 @@ function inquireAdd() {
                 type: "input",
                 message: "What is the department of the product?",
                 name: "department",
-                validate: wordValidate
+                validate: emptyValidate
             },
             {
                 type: "input",
@@ -263,6 +269,56 @@ function emptyValidate(input) {
         if (input === "") {
             // Pass the return value in the done callback
             done('Required Field');
+            return;
+        }
+        // Pass the return value in the done callback
+        done(null, true);
+    }, 1000);
+}
+
+function deleteInquire() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the ID of the item you would like to delete?",
+                name: "delete",
+                validate: idValidate
+            },
+            {
+                type: "input",
+                message: "Are You Sure?",
+                name: "confirm",
+                validate: deleteConfirm
+            }
+        ])
+        .then(function(input) {
+            deleteItem(input.delete);
+        })
+}
+
+function deleteItem(itemId) {
+    connection.query("DELETE FROM products WHERE ?", {
+        id: itemId
+    }, function(err, res) {
+        if (err) throw err;
+        console.log("")
+        console.log("Item Successfully Deleted!");
+        console.log("");
+        manager();
+    })
+}
+
+// Validate for empty fields 
+function deleteConfirm (input) {
+    // Declare function as asynchronous, and save the done callback
+    var done = this.async();
+
+    // Do async stuff
+    setTimeout(function () {
+        if (input !== "DELETE") {
+            // Pass the return value in the done callback
+            done("IF YOU ARE SURE YOU WANT TO DELETE THIS PRODUCT TYPE : DELETE");
             return;
         }
         // Pass the return value in the done callback
