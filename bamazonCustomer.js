@@ -121,7 +121,7 @@ function purchase(newQuant, ID, price) {
             }
         ], function (err, res) {
             if (err) throw err;
-            console.log("\nPURCHASE OF " + price + " COMPLETE\n");
+            console.log("\nPURCHASE OF $" + price + " COMPLETE\n");
             // Call original user prompt again after 2 seconds
             setTimeout(productsTable, 2000);
         })
