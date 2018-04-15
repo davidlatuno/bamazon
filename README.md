@@ -3,7 +3,10 @@
 ## Overview
 Amazon-like store front using a CLI, node.js, and mySQL
 
----
+**INDEX**
+* [NPM MODULES](https://github.com/davidlatuno/bamazon#npm-modules)
+* [RUNNING THE PROGRAM](https://github.com/davidlatuno/bamazon#running-the-program)
+* [EXAMPLE VIDEOS](https://github.com/davidlatuno/bamazon#example-vidoes)
 
 ## npm modules
 
@@ -19,7 +22,6 @@ npm i
 
 **hint: dont forget to cd into the folder you cloned the repo into before running any terminal commands**
 
----
 
 ## Running the program
 
@@ -35,7 +37,6 @@ node bamazonManager.js
 
 **hint: dont forget to cd into the folder you cloned the repo into before running any terminal commands**
 
----
 
 ## Example Vidoes
 
