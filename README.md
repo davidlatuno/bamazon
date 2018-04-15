@@ -1,12 +1,26 @@
 # bamazon
 
-## Overview
-Amazon-like store front using a CLI, node.js, and mySQL
-
 **INDEX**
+* [OVERVIEW](https://github.com/davidlatuno/bamazon#overview)
 * [NPM MODULES](https://github.com/davidlatuno/bamazon#npm-modules)
 * [RUNNING THE PROGRAM](https://github.com/davidlatuno/bamazon#running-the-program)
 * [EXAMPLE VIDEOS](https://github.com/davidlatuno/bamazon#example-vidoes)
+
+
+## Overview
+Amazon-like store front using a CLI, node.js, and mySQL
+
+**Customer View:**
+1. See available products for sale
+2. Make a purchase if item has enough stock
+
+**Manager View:**
+1. View current products for sale
+2. View low inventory
+3. Add inventory to specific items
+4. Add new products
+5. Delete products
+
 
 ## npm modules
 
@@ -42,24 +56,25 @@ node bamazonManager.js
 
 Customer Buying Product
 
-* <a href="https://www.youtube.com/watch?v=08uAMCDGR-4" target="_blank">Example Customer</a>
+* [Example Customer](https://www.youtube.com/watch?v=08uAMCDGR-4)
+
 
 Manger Viewing Products and Low Inventory:
 
-* <a href="https://www.youtube.com/watch?v=iSu6DDYth_4" target="_blank">Example Manager 1</a>
+* [Example Manager 1](https://www.youtube.com/watch?v=iSu6DDYth_4)
 
 Manger Adding Inventory and View Low Inventory when non exists:
 
-* <a href="https://www.youtube.com/watch?v=ChUseczs04Y" target="_blank">Example Manager 2</a>
+* [Example Manager 2](https://www.youtube.com/watch?v=ChUseczs04Y)
 
 Manger Adding Product:
 
-* <a href="https://www.youtube.com/watch?v=bkD4Ht1QjG8" target="_blank">Example Manager 3</a>
+* [Example Manager 3](https://www.youtube.com/watch?v=bkD4Ht1QjG8)
 
 Manger Deleting Product:
 
-* <a href="https://www.youtube.com/watch?v=PAZuZrmlzNY" target="_blank">Example Manager 4</a>
+* [Example Manager 4](https://www.youtube.com/watch?v=PAZuZrmlzNY)
 
 Validation Examples for Customer view (manager validations used are very similar):
 
-* <a href="https://www.youtube.com/watch?v=YZ1dUW4pGm0" target="_blank">Example Validation</a>
+* [Example Validation](https://www.youtube.com/watch?v=YZ1dUW4pGm0)
