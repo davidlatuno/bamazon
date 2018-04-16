@@ -65,7 +65,9 @@ function productsTable(pass) {
         var data = [["ID", "NAME", "DEPARMENT", "PRICE", "QUANTITY"]];
         // Add products to data array
         for (var i = 0; i < res.length; i++) {
-            data.push(Object.values(res[i]));
+            var newProduct = Object.values(res[i])
+            newProduct.pop()
+            data.push(newProduct);
             productIdArray.push(res[i].id);
         }
         // Prints table to console
