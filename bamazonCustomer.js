@@ -86,7 +86,7 @@ function buyID() {
             if (!input.confirm) {
                 buyID();
             } else {
-                readID(input.id, input.number, purchase, readIdOverhead);
+                readID(input.id, input.number, purchase, readIdSales);
             }
         })
 };
@@ -107,7 +107,7 @@ function readID(productId, productPurchase, callback1, callback2) {
             intro();
         } else {
             callback1(newQuant, productId, price);
-            callback2(productId, productPurchase, overHead)
+            callback2(productId, productPurchase, productSales)
         }
     });
 };
@@ -131,7 +131,7 @@ function purchase(newQuant, ID, price) {
 }
 
 // Reads database when user inputs valid query
-function readIdOverhead(productId, productPurchase, callback) {
+function readIdSales(productId, productPurchase, callback) {
     connection.query("SELECT * FROM products WHERE id=?", [productId], function (err, res) {
         if (err) throw err;
         
@@ -148,7 +148,7 @@ function readIdOverhead(productId, productPurchase, callback) {
 };
 
 // Function to update product quantity on database
-function overHead(newSales, ID) {
+function productSales(newSales, ID) {
     connection.query("UPDATE products SET ? WHERE ?",
         [
             {
