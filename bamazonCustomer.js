@@ -25,7 +25,7 @@ function productsTable() {
         // Title Row
         var data = [["ID", "NAME", "DEPARMENT", "PRICE", "QUANTITY"]];
         // Add products to data array
-        for (var i = 0; i < res.length - 1; i++) {
+        for (var i = 0; i < res.length; i++) {
             var newProduct = Object.values(res[i])
             newProduct.pop()
             data.push(newProduct);
