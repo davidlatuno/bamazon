@@ -2,12 +2,21 @@ CREATE DATABASE bamazon;
 
 USE bamazon;
 
+CREATE TABLE departments(
+	id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	department_name VARCHAR(100) NOT NULL,
+	over_head_costs DECIMAL(10, 2) NOT NULL
+);
+
+INSERT INTO departments (department_name, over_head_costs) VALUES ("Games", 10000), ("Electronics", 20000);
+
 CREATE TABLE products(
 	id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	product_name VARCHAR(100) NOT NULL,
 	department_name VARCHAR(100) NOT NULL,
 	price DECIMAL(10, 2) NOT NULL,
-	stock_quantity INTEGER(10)
+	stock_quantity INTEGER(10),
+	product_sales DECIMAL(10, 2) NOT NULL DEFAULT 0
 );
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)

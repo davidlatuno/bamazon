@@ -25,8 +25,10 @@ function productsTable() {
         // Title Row
         var data = [["ID", "NAME", "DEPARMENT", "PRICE", "QUANTITY"]];
         // Add products to data array
-        for (var i = 0; i < res.length; i++) {
-            data.push(Object.values(res[i]));
+        for (var i = 0; i < res.length - 1; i++) {
+            var newProduct = Object.values(res[i])
+            newProduct.pop()
+            data.push(newProduct);
             productIdArray.push(res[i].id);
         }
         // Prints table to console
@@ -84,13 +86,13 @@ function buyID() {
             if (!input.confirm) {
                 buyID();
             } else {
-                readID(input.id, input.number, purchase);
+                readID(input.id, input.number, purchase, readIdOverhead);
             }
         })
 };
 
 // Reads database when user inputs valid query
-function readID(productId, productPurchase, callback) {
+function readID(productId, productPurchase, callback1, callback2) {
     connection.query("SELECT * FROM products WHERE id=?", [productId], function (err, res) {
         if (err) throw err;
         // Holds the current quantity of item chosen
@@ -104,7 +106,8 @@ function readID(productId, productPurchase, callback) {
             console.log("\nINSUFFICIENT QUANTITY!\n");
             intro();
         } else {
-            callback(newQuant, productId, price);
+            callback1(newQuant, productId, price);
+            callback2(productId, productPurchase, overHead)
         }
     });
 };
@@ -124,6 +127,38 @@ function purchase(newQuant, ID, price) {
             console.log("\nPURCHASE OF $" + price + " COMPLETE\n");
             // Call original user prompt again after 2 seconds
             setTimeout(productsTable, 2000);
+        })
+}
+
+// Reads database when user inputs valid query
+function readIdOverhead(productId, productPurchase, callback) {
+    connection.query("SELECT * FROM products WHERE id=?", [productId], function (err, res) {
+        if (err) throw err;
+        
+        // Calculates total charged to customer
+        var price = (res[0].price) * productPurchase;
+        // Calculates current sales
+        var currentSales = (res[0].product_sales)
+        
+        var newSales = currentSales + price;
+        
+        callback(newSales, productId)
+        
+    });
+};
+
+// Function to update product quantity on database
+function overHead(newSales, ID) {
+    connection.query("UPDATE products SET ? WHERE ?",
+        [
+            {
+                product_sales: newSales
+            },
+            {
+                id: ID
+            }
+        ], function (err, res) {
+            if (err) throw err;
         })
 }
 
