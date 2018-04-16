@@ -35,3 +35,9 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Princess Mononoke", "Movies", "20.00", 100), ("Wanted", "Movies", "10.00", 100);
 
 SELECT * FROM products;
+
+SELECT * FROM departments;
+
+SELECT department_name, SUM(product_sales) AS "Total Sales" FROM products GROUP BY department_name;
+
+SELECT departments.id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS "Total Sales", SUM(products.product_sales) - departments.over_head_costs AS "Total Profit" FROM departments INNER JOIN products ON departments.department_name=products.department_name GROUP BY departments.id;
