@@ -278,6 +278,7 @@ function emptyValidate(input) {
     }, 1000);
 }
 
+// Inquirer for delete product
 function deleteInquire() {
     inquirer
         .prompt([
@@ -299,6 +300,7 @@ function deleteInquire() {
         })
 }
 
+// Deletes selected item from table
 function deleteItem(itemId) {
     connection.query("DELETE FROM products WHERE ?", {
         id: itemId

@@ -14,6 +14,7 @@ var connection = mysql.createConnection({
 
 // Logs profits table to terminal using table npm package
 function profitTable() {
+    // SQL query for total profits
     var query = "SELECT departments.id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS 'Total Sales', SUM(products.product_sales) - departments.over_head_costs AS 'Total Profit' FROM departments INNER JOIN products ON departments.department_name=products.department_name GROUP BY departments.id;"
 
     connection.query(query, function (err, res) {
@@ -32,7 +33,7 @@ function profitTable() {
     });
 }
 
-// Asks user if they want to buy items
+// Asks user for action
 function intro() {
     inquirer
         .prompt([
@@ -54,7 +55,7 @@ function intro() {
         })
 };
 
-// Inquirer for addProduct
+// Inquirer for add department
 function inquireAdd() {
     inquirer
         .prompt([
@@ -86,7 +87,7 @@ function inquireAdd() {
         })
 }
 
-// Function that adds item to database
+// Function that adds department to database
 function addDepartment(name, costs) {
     connection.query("INSERT INTO departments SET ?", {
         department_name: name,
