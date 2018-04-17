@@ -8,7 +8,7 @@
 
 
 ## Overview
-Amazon-like store front using a CLI, node.js, and mySQL
+Amazon-like store front using a CLI, node.js, and a local mySQL database
 
 **Customer View:**
 1. See available products for sale
@@ -20,6 +20,10 @@ Amazon-like store front using a CLI, node.js, and mySQL
 3. Add inventory to specific items
 4. Add new products
 5. Delete products
+
+**Supervisor View**
+1. View total profits by department
+2. Add a new department to total profits table
 
 
 ## npm modules
@@ -76,6 +80,10 @@ Manger Deleting Product:
 
 [![manager4](http://img.youtube.com/vi/PAZuZrmlzNY/0.jpg)](http://www.youtube.com/watch?v=PAZuZrmlzNY "Manager Video 4")
 
-Validation Examples for Customer view (manager validations used are very similar):
+Supervisor Viewing Total Profits and adding new deparment
+
+[![supervisor](http://img.youtube.com/vi/FIz3fTBiYTM/0.jpg)](http://www.youtube.com/watch?v=FIz3fTBiYTM "Bamazon Supervisor")
+
+Validation Examples for Customer view (manager and supervisor validations used are very similar):
 
 [![validation](http://img.youtube.com/vi/YZ1dUW4pGm0/0.jpg)](http://www.youtube.com/watch?v=YZ1dUW4pGm0 "Customer Validation")
