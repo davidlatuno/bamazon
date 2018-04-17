@@ -40,4 +40,4 @@ SELECT * FROM departments;
 
 SELECT department_name, SUM(product_sales) AS "Total Sales" FROM products GROUP BY department_name;
 
-SELECT departments.id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS "Total Sales", SUM(products.product_sales) - departments.over_head_costs AS "Total Profit" FROM departments INNER JOIN products ON departments.department_name=products.department_name GROUP BY departments.id;
+SELECT departments.id, departments.department_name, departments.over_head_costs, IF(SUM(products.product_sales) is NULL, 0.00, SUM(products.product_sales)) AS "Total Sales", IF(SUM(products.product_sales) is NULL, 0.00 - departments.over_head_costs, 0.00 - departments.over_head_costs) AS "Total Profit" FROM departments LEFT JOIN products ON departments.department_name=products.department_name GROUP BY departments.id;
