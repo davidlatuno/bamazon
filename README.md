@@ -56,25 +56,26 @@ node bamazonManager.js
 
 Customer Buying Product
 
-* [Example Customer](https://www.youtube.com/watch?v=08uAMCDGR-4)
-
+[![customer](http://img.youtube.com/vi/08uAMCDGR-4/0.jpg)](http://www.youtube.com/watch?v=08uAMCDGR-4 "Example Customer")
 
 Manger Viewing Products and Low Inventory:
 
-* [Example Manager 1](https://www.youtube.com/watch?v=iSu6DDYth_4)
+[![manager1](http://img.youtube.com/vi/iSu6DDYth_4/0.jpg)](http://www.youtube.com/watch?v=iSu6DDYth_4 "Manager Video 1")
 
 Manger Adding Inventory and View Low Inventory when non exists:
 
-* [Example Manager 2](https://www.youtube.com/watch?v=ChUseczs04Y)
+[![manager2](http://img.youtube.com/vi/ChUseczs04Y/0.jpg)](http://www.youtube.com/watch?v=ChUseczs04Y "Manager Video 2")
+
 
 Manger Adding Product:
 
-* [Example Manager 3](https://www.youtube.com/watch?v=bkD4Ht1QjG8)
+[![manager3](http://img.youtube.com/vi/bkD4Ht1QjG8/0.jpg)](http://www.youtube.com/watch?v=bkD4Ht1QjG8 "Manager Video 3")
+
 
 Manger Deleting Product:
 
-* [Example Manager 4](https://www.youtube.com/watch?v=PAZuZrmlzNY)
+[![manager4](http://img.youtube.com/vi/PAZuZrmlzNY/0.jpg)](http://www.youtube.com/watch?v=PAZuZrmlzNY "Manager Video 4")
 
 Validation Examples for Customer view (manager validations used are very similar):
 
-* [Example Validation](https://www.youtube.com/watch?v=YZ1dUW4pGm0)
+[![validation](http://img.youtube.com/vi/YZ1dUW4pGm0/0.jpg)](http://www.youtube.com/watch?v=YZ1dUW4pGm0 "Customer Validation")
