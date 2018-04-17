@@ -56,7 +56,7 @@ node bamazonManager.js
 
 Customer Buying Product
 
-[![customer](http://img.youtube.com/vi/08uAMCDGR-4/0.jpg)](http://www.youtube.com/watch?v=08uAMCDGR-4 "Example Customer")
+[![customer](http://img.youtube.com/vi/ZKhhUs0DFoE/0.jpg)](http://www.youtube.com/watch?v=ZKhhUs0DFoE "Bamazon Customer")
 
 Manger Viewing Products and Low Inventory:
 
